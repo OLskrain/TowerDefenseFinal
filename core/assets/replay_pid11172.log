@@ -1,0 +1,42 @@
+JvmtiExport can_access_local_variables 0
+JvmtiExport can_hotswap_or_post_breakpoint 0
+JvmtiExport can_post_on_exceptions 0
+# 228 ciObject found
+ciMethod java/lang/Object <init> ()V 4097 1 24272 0 0
+ciMethod java/lang/String startsWith (Ljava/lang/String;I)Z 3897 11297 3641 0 480
+ciMethod java/lang/String startsWith (Ljava/lang/String;)Z 2049 1 8517 0 0
+ciMethod java/lang/String endsWith (Ljava/lang/String;)Z 2257 1 4637 0 0
+ciMethod java/lang/String toCharArray ()[C 2873 1 2683 0 0
+ciMethod java/lang/System arraycopy (Ljava/lang/Object;ILjava/lang/Object;II)V 22529 1 2816 0 -1
+ciMethod java/net/URL <init> (Ljava/net/URL;Ljava/lang/String;)V 2065 1 852 0 -1
+ciMethod java/nio/Buffer position ()I 2073 1 259 0 -1
+ciMethod java/lang/Character isSurrogate (C)Z 169 1 57 0 -1
+ciMethod java/security/AccessController doPrivileged (Ljava/security/PrivilegedExceptionAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; 2049 1 256 6 -1
+ciMethod java/lang/Math min (II)I 4097 1 17356 0 -1
+ciMethod java/nio/charset/Charset newEncoder ()Ljava/nio/charset/CharsetEncoder; 0 0 1 0 -1
+ciMethod java/util/Arrays copyOf ([BI)[B 2769 1 4591 0 0
+ciMethod java/util/Objects requireNonNull (Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object; 1577 1 194 0 0
+ciMethod sun/nio/cs/UTF_8 newEncoder ()Ljava/nio/charset/CharsetEncoder; 257 1 32 0 0
+ciMethod sun/nio/cs/ArrayEncoder encode ([CII[B)I 0 0 1 0 -1
+ciMethod sun/nio/cs/UTF_8$Encoder encode ([CII[B)I 1753 73729 1203 0 -1
+ciMethod sun/nio/cs/UTF_8$Encoder <init> (Ljava/nio/charset/Charset;Lsun/nio/cs/UTF_8$1;)V 257 1 32 0 -1
+ciMethod java/nio/charset/CharsetEncoder malformedInputAction ()Ljava/nio/charset/CodingErrorAction; 0 0 1 0 -1
+ciMethod java/nio/charset/CharsetEncoder onMalformedInput (Ljava/nio/charset/CodingErrorAction;)Ljava/nio/charset/CharsetEncoder; 225 1 37 0 0
+ciMethod java/nio/charset/CharsetEncoder implOnMalformedInput (Ljava/nio/charset/CodingErrorAction;)V 225 1 37 0 -1
+ciMethod java/nio/charset/CharsetEncoder onUnmappableCharacter (Ljava/nio/charset/CodingErrorAction;)Ljava/nio/charset/CharsetEncoder; 225 1 37 0 0
+ciMethod java/nio/charset/CharsetEncoder implOnUnmappableCharacter (Ljava/nio/charset/CodingErrorAction;)V 225 1 37 0 -1
+ciMethod java/nio/charset/CharsetEncoder maxBytesPerChar ()F 2129 1 2490 0 0
+ciMethod java/nio/charset/CharsetEncoder encode (Ljava/nio/CharBuffer;Ljava/nio/ByteBuffer;Z)Ljava/nio/charset/CoderResult; 1 1 1593 0 -1
+ciMethod java/nio/charset/CharsetEncoder flush (Ljava/nio/ByteBuffer;)Ljava/nio/charset/CoderResult; 1 1 1593 0 -1
+ciMethod java/nio/charset/CharsetEncoder reset ()Ljava/nio/charset/CharsetEncoder; 2105 1 3706 0 0
+ciMethod java/nio/charset/CharsetEncoder implReset ()V 2105 1 2318 0 0
+ciMethod java/nio/ByteBuffer wrap ([B)Ljava/nio/ByteBuffer; 0 0 2 0 -1
+ciMethodData java/lang/Object <init> ()V 2 24272 orig 264 56 173 174 82 0 0 0 0 128 4 119 22 0 0 0 0 32 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 77 68 79 32 101 120 116 114 97 32 100 97 116 97 32 108 111 99 107 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 0 0 129 230 2 0 1 0 0 0 0 0 0 0 0 0 0 0 2 0 0 0 0 0 3 0 1 0 0 0 0 0 0 0 255 255 255 255 0 0 0 0 0 0 0 0 data 0 oops 0
+ciMethod sun/misc/MetaIndex mayContain (Ljava/lang/String;)Z 3345 5169 3777 0 0
+ciMethod java/nio/CharBuffer wrap ([C)Ljava/nio/CharBuffer; 0 0 1 0 -1
+ciMethod java/nio/charset/CoderResult isUnderflow ()Z 1281 1 6584 0 -1
+ciMethod sun/net/www/ParseUtil encodePath (Ljava/lang/String;Z)Ljava/lang/String; 1017 65761 565 0 -1
+ciMethod sun/misc/URLClassPath check (Ljava/net/URL;)V 97 1 12 0 -1
+ciMethod sun/misc/URLClassPath$JarLoader ensureOpen ()V 2137 1 1917 0 0
+ciMethod sun/misc/URLClassPath$JarLoader checkResource (Ljava/lang/String;ZLjava/util/jar/JarEntry;)Lsun/misc/Resource; 145 1 167 0 0
+ciMethod sun/misc/URLClassPath$JarLoader getResour
