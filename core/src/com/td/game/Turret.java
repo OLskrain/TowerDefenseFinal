@@ -12,6 +12,8 @@ public class Turret {
     private Map map;
     private int type;
     private int damage;
+    private int level;
+    private int cost;
     private TextureRegion[] regions;
     private Vector2 position;
     private float angle;
@@ -32,6 +34,14 @@ public class Turret {
 
     public int getCellY() {
         return (int) (position.y / 80);
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public int getLevel() {
+        return level;
     }
 
     private Vector2 tmpVector;
@@ -55,11 +65,14 @@ public class Turret {
         this.fireDelay = template.getFireRate();
         this.type = template.getImageIndex();
         this.damage = template.getDamage();
+        this.level = template.getLevel();
+        this.cost = template.getCost();
         setTurretToCell(cellX, cellY);
         active = true;
     }
 
     public void deactivate() {
+        position.set(0,0);
         active = false;
     }
 

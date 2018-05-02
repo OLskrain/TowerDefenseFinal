@@ -8,7 +8,11 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.*;
+
+import com.badlogic.gdx.math.Vector2;
 
 public class TurretEmitter {
     public class TurretTemplate {
@@ -17,6 +21,7 @@ public class TurretEmitter {
         private int damage;
         private int radius;
         private float fireRate;
+        private int level;
 
         public int getImageIndex() {
             return imageIndex;
@@ -38,14 +43,19 @@ public class TurretEmitter {
             return fireRate;
         }
 
-        // #image_index cost fire_rate damage radius
+        public int getLevel() {
+            return level;
+        }
+
+        // #image_index cost fire_rate damage radius level
         public TurretTemplate(String line) {
-            String[] tokens = line.split("\\s");
+            String[] tokens = line.split(",");
             imageIndex = Integer.parseInt(tokens[0]);
             cost = Integer.parseInt(tokens[1]);
             fireRate = Float.parseFloat(tokens[2]);
             damage = Integer.parseInt(tokens[3]);
             radius = Integer.parseInt(tokens[4]);
+            level = Integer.parseInt(tokens[5]);
         }
     }
 
@@ -54,12 +64,18 @@ public class TurretEmitter {
     private Map map;
     private Turret[] turrets;
     private TurretTemplate[] templates;
+    private ArrayList<Turret> turretsIsActiveArray;
+
+    public ArrayList<Turret> getTurretsIsActiveArray() {
+        return turretsIsActiveArray;
+    }
 
     public TurretEmitter(TextureAtlas atlas, GameScreen gameScreen, Map map) {
         this.loadTurretData();
         this.gameScreen = gameScreen;
         this.map = map;
         this.atlas = atlas;
+        this.turretsIsActiveArray = new ArrayList<Turret>();
         this.turrets = new Turret[20];
         TextureRegion[] regions = new TextureRegion(atlas.findRegion("turrets")).split(80, 80)[0];
         for (int i = 0; i < turrets.length; i++) {
@@ -97,6 +113,7 @@ public class TurretEmitter {
             for (int i = 0; i < turrets.length; i++) {
                 if (!turrets[i].isActive()) {
                     turrets[i].activate(templates[index], cellX, cellY);
+                    turretsIsActiveArray.add(turrets[i]);//добаляем турель в список
                     break;
                 }
             }

@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -14,6 +15,11 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.td.game.gui.UpperPanel;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.*;
+import java.util.Vector;
 
 public class GameScreen implements Screen {
     private SpriteBatch batch;
@@ -30,7 +36,6 @@ public class GameScreen implements Screen {
     private PlayerInfo playerInfo;
     private UpperPanel upperPanel;
     private Camera camera;
-
     private Vector2 mousePosition;
 
     private int selectedCellX, selectedCellY;
@@ -63,7 +68,7 @@ public class GameScreen implements Screen {
         monsterEmitter = new MonsterEmitter(atlas, map, 60);
         particleEmitter = new ParticleEmitter(atlas.findRegion("star16"));
         mousePosition = new Vector2(0, 0);
-        playerInfo = new PlayerInfo(100, 32);
+        playerInfo = new PlayerInfo(5000, 32);
         createGUI();
     }
 
@@ -97,12 +102,15 @@ public class GameScreen implements Screen {
         Button btnSetTurret = new TextButton("Set", skin, "simpleSkin");
         Button btnUpgradeTurret = new TextButton("Upg", skin, "simpleSkin");
         Button btnDestroyTurret = new TextButton("Dst", skin, "simpleSkin");
+        Button btnToMenu = new TextButton("Menu", skin, "simpleSkin");
         btnSetTurret.setPosition(10, 10);
         btnUpgradeTurret.setPosition(110, 10);
         btnDestroyTurret.setPosition(210, 10);
+        btnToMenu.setPosition(1110, 10);
         groupTurretAction.addActor(btnSetTurret);
         groupTurretAction.addActor(btnUpgradeTurret);
         groupTurretAction.addActor(btnDestroyTurret);
+        groupTurretAction.addActor(btnToMenu);
 
 
         groupTurretSelection = new Group();
@@ -139,7 +147,47 @@ public class GameScreen implements Screen {
                 groupTurretSelection.setVisible(!groupTurretSelection.isVisible());
             }
         });
+        btnUpgradeTurret.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                upgradeTurret();
+            }
+        });
+        btnDestroyTurret.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+               destroyTurret();
+            }
+        });
+        btnToMenu.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+           ScreenManager.getInstance().changeScreen(ScreenManager.ScreenType.MENU);
+            }
+        });
         skin.dispose();
+    }
+
+    public void upgradeTurret(){
+        for (int i = 0; i < turretEmitter.getTurretsIsActiveArray().size() ; i++) {
+            if(turretEmitter.getTurretsIsActiveArray().get(i).getCellX() == selectedCellX && turretEmitter.getTurretsIsActiveArray().get(i).getCellY() == selectedCellY ){
+                if(turretEmitter.getTurretsIsActiveArray().get(i).getLevel() < 2){
+                    turretEmitter.destroyTurret(turretEmitter.getTurretsIsActiveArray().get(i).getCellX(), turretEmitter.getTurretsIsActiveArray().get(i).getCellY());
+                    playerInfo.addMoney(turretEmitter.getTurretsIsActiveArray().get(i).getCost()/2); // возвращаем половину монет за удаление пушки
+                    setTurret(turretEmitter.getTurretsIsActiveArray().get(i).getLevel());
+                    break;
+                }
+            }
+        }
+    }
+
+    public void destroyTurret(){
+        for (int i = 0; i < turretEmitter.getTurretsIsActiveArray().size() ; i++) {
+            if(turretEmitter.getTurretsIsActiveArray().get(i).getCellX() == selectedCellX && turretEmitter.getTurretsIsActiveArray().get(i).getCellY() == selectedCellY ){
+                turretEmitter.destroyTurret(turretEmitter.getTurretsIsActiveArray().get(i).getCellX(), turretEmitter.getTurretsIsActiveArray().get(i).getCellY());
+                playerInfo.addMoney(turretEmitter.getTurretsIsActiveArray().get(i).getCost()/2); // возвращаем половину монет за удаление пушки
+            }
+        }
     }
 
     public void setTurret(int index) {
