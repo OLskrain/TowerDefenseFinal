@@ -17,6 +17,10 @@ public class UpperPanel {
     private StringBuilder tmpSB;
     private BitmapFont font36;
 
+    public void setPlayerInfo(PlayerInfo playerInfo) {
+        this.playerInfo = playerInfo;
+    }
+
     public UpperPanel(PlayerInfo playerInfo, Stage stage, int x, int y) {
         this.playerInfo = playerInfo;
         font36 = Assets.getInstance().getAssetManager().get("zorque36.ttf", BitmapFont.class);
